@@ -1,0 +1,1531 @@
+<!doctype html>
+<html lang="en" class="scroll-smooth">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>The Art of the Commit: A Visual Guide to Healthy Git History</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Inter & JetBrains Mono Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+      body {
+        font-family: "Inter", sans-serif;
+      }
+      .mono {
+        font-family: "JetBrains Mono", monospace;
+      }
+      /* Simple glassmorphism */
+      .glass-card {
+        background: rgba(255, 255, 255, 0.8);
+        backdrop-filter: blur(8px);
+        border: 1px solid rgba(229, 231, 235, 0.5);
+      }
+    </style>
+  </head>
+  <body class="bg-slate-50 text-slate-900 min-h-screen">
+    <!-- Header Banner -->
+    <header
+      class="border-b border-slate-200 bg-white py-8 px-6 sticky top-0 z-50 shadow-sm"
+    >
+      <div
+        class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-start md:items-center gap-4"
+      >
+        <div>
+          <div class="flex items-center gap-2 mb-2">
+            <span
+              class="bg-indigo-100 text-indigo-800 text-xs font-bold px-2.5 py-1 rounded-full uppercase tracking-wider"
+              >Engineering Standards</span
+            >
+          </div>
+          <h1 class="text-2xl md:text-3xl font-extrabold tracking-tight">
+            The Art of the Commit
+          </h1>
+          <p class="text-slate-600 mt-1 max-w-2xl">
+            A visual comparison of Git hygiene and Pull Request structure. Learn
+            how documentation at the commit level saves hours of cognitive debt.
+          </p>
+        </div>
+      </div>
+    </header>
+
+    <main class="max-w-7xl mx-auto px-4 md:px-6 py-12 space-y-16">
+      <!-- Side-by-Side Lifecycles -->
+      <section class="space-y-6">
+        <div class="text-center max-w-2xl mx-auto space-y-2">
+          <h2 class="text-2xl md:text-3xl font-extrabold tracking-tight">
+            Same Developer. Two Universes.
+          </h2>
+          <p class="text-slate-600">
+            One ticket. One engineer. Two timelines where every decision
+            diverged.
+            <br class="hidden md:block" />
+            <span class="font-medium text-slate-700"
+              >Can you tell what they built just by reading the commit
+              history?</span
+            >
+          </p>
+        </div>
+
+        <!-- Comparison Layout Switcher for Mobile -->
+        <div class="grid grid-cols-1 gap-8 items-start max-w-2xl mx-auto">
+          <!-- Universe A Card: The Chaotic Flow -->
+          <div
+            class="bg-white rounded-xl border border-rose-200 overflow-hidden shadow-sm hover:shadow-md transition-all"
+          >
+            <div
+              class="bg-rose-50 p-4 border-b border-rose-200 flex items-center justify-between"
+            >
+              <div class="flex items-center gap-2">
+                <span
+                  class="w-3 h-3 rounded-full bg-rose-500 animate-pulse"
+                ></span>
+                <h3 class="font-bold text-rose-800 flex items-center gap-2">
+                  Universe A: The Opaque Developer
+                </h3>
+              </div>
+            </div>
+
+            <!-- PR Details View Bad -->
+            <div class="p-6 border-b border-slate-100">
+              <h4
+                class="text-xs font-semibold text-slate-400 uppercase tracking-widest mb-3"
+              >
+                Pull Request Details
+              </h4>
+              <div
+                class="space-y-2 bg-slate-50 p-4 rounded-lg border border-slate-200"
+              >
+                <div class="flex items-start justify-between gap-4">
+                  <span class="text-sm font-semibold">JIR-404</span>
+                  <span
+                    class="text-xs bg-slate-200 text-slate-600 px-2 py-0.5 rounded"
+                    >#812</span
+                  >
+                </div>
+                <p class="text-xs text-slate-400 italic">
+                  No description provided. "fixes the ticket"
+                </p>
+              </div>
+            </div>
+
+            <!-- Commit Timeline Bad -->
+            <div class="p-6 space-y-4">
+              <h4
+                class="text-xs font-semibold text-slate-400 uppercase tracking-widest mb-3"
+              >
+                Commit History
+              </h4>
+
+              <div
+                class="relative pl-6 space-y-6 before:content-[''] before:absolute before:left-[11px] before:top-2 before:bottom-2 before:w-[2px] before:bg-rose-200:bg-rose-950"
+              >
+                <!-- Commit 1 -->
+                <div class="relative group">
+                  <span
+                    class="absolute -left-[21px] top-1.5 w-3 h-3 rounded-full bg-rose-500 ring-4 ring-white"
+                  ></span>
+                  <div
+                    class="bg-rose-50/50 p-3 rounded-lg border border-rose-100"
+                  >
+                    <div class="flex justify-between items-start gap-4">
+                      <span class="mono text-xs font-semibold text-slate-600"
+                        >8d1ae3c</span
+                      >
+                      <span class="text-[10px] text-slate-400">3 days ago</span>
+                    </div>
+                    <h5 class="text-sm font-bold text-slate-900 mt-1">
+                      JIR-404 wip
+                    </h5>
+                  </div>
+                </div>
+
+                <!-- Commit 2 -->
+                <div class="relative group">
+                  <span
+                    class="absolute -left-[21px] top-1.5 w-3 h-3 rounded-full bg-rose-500 ring-4 ring-white"
+                  ></span>
+                  <div
+                    class="bg-rose-50/50 p-3 rounded-lg border border-rose-100"
+                  >
+                    <div class="flex justify-between items-start gap-4">
+                      <span class="mono text-xs font-semibold text-slate-600"
+                        >5f9ea22</span
+                      >
+                      <span class="text-[10px] text-slate-400">3 days ago</span>
+                    </div>
+                    <h5 class="text-sm font-bold text-slate-900 mt-1">
+                      button looks good
+                    </h5>
+                  </div>
+                </div>
+
+                <!-- Commit 3 - Overly long message that wraps -->
+                <div class="relative group">
+                  <span
+                    class="absolute -left-[21px] top-1.5 w-3 h-3 rounded-full bg-rose-500 ring-4 ring-white"
+                  ></span>
+                  <div
+                    class="bg-rose-50/50 p-3 rounded-lg border border-rose-100"
+                  >
+                    <div class="flex justify-between items-start gap-4">
+                      <span class="mono text-xs font-semibold text-slate-600"
+                        >3b7df01</span
+                      >
+                      <span class="text-[10px] text-slate-400">2 days ago</span>
+                    </div>
+                    <h5 class="text-sm font-bold text-slate-900 mt-1">
+                      JIR-404 Refactored the backend stuff and updated the
+                      AP<span class="text-slate-400">...</span>
+                    </h5>
+                    <p class="text-xs text-slate-500 mt-1 italic">
+                      <span class="text-slate-400">...</span>I endpoint to
+                      handle things better, also fixed some other stuff while I
+                      was in there
+                    </p>
+                  </div>
+                </div>
+
+                <!-- Commit 4 -->
+                <div class="relative group">
+                  <span
+                    class="absolute -left-[21px] top-1.5 w-3 h-3 rounded-full bg-rose-500 ring-4 ring-white"
+                  ></span>
+                  <div
+                    class="bg-rose-50/50 p-3 rounded-lg border border-rose-100"
+                  >
+                    <div class="flex justify-between items-start gap-4">
+                      <span class="mono text-xs font-semibold text-slate-600"
+                        >1a2bc3d</span
+                      >
+                      <span class="text-[10px] text-slate-400">2 days ago</span>
+                    </div>
+                    <h5 class="text-sm font-bold text-slate-900 mt-1">fix</h5>
+                  </div>
+                </div>
+
+                <!-- Commit 5 -->
+                <div class="relative group">
+                  <span
+                    class="absolute -left-[21px] top-1.5 w-3 h-3 rounded-full bg-rose-500 ring-4 ring-white"
+                  ></span>
+                  <div
+                    class="bg-rose-50/50 p-3 rounded-lg border border-rose-100"
+                  >
+                    <div class="flex justify-between items-start gap-4">
+                      <span class="mono text-xs font-semibold text-slate-600"
+                        >ec7dd92</span
+                      >
+                      <span class="text-[10px] text-slate-400">1 day ago</span>
+                    </div>
+                    <h5 class="text-sm font-bold text-slate-900 mt-1">lint</h5>
+                  </div>
+                </div>
+
+                <!-- Commit 6 - Lint whack-a-mole -->
+                <div class="relative group">
+                  <span
+                    class="absolute -left-[21px] top-1.5 w-3 h-3 rounded-full bg-rose-500 ring-4 ring-white"
+                  ></span>
+                  <div
+                    class="bg-rose-50/50 p-3 rounded-lg border border-rose-100"
+                  >
+                    <div class="flex justify-between items-start gap-4">
+                      <span class="mono text-xs font-semibold text-slate-600"
+                        >b2c4e11</span
+                      >
+                      <span class="text-[10px] text-slate-400">1 day ago</span>
+                    </div>
+                    <h5 class="text-sm font-bold text-slate-900 mt-1">
+                      fix lint
+                    </h5>
+                  </div>
+                </div>
+
+                <!-- Commit 7 - Lint whack-a-mole continues -->
+                <div class="relative group">
+                  <span
+                    class="absolute -left-[21px] top-1.5 w-3 h-3 rounded-full bg-rose-500 ring-4 ring-white"
+                  ></span>
+                  <div
+                    class="bg-rose-50/50 p-3 rounded-lg border border-rose-100"
+                  >
+                    <div class="flex justify-between items-start gap-4">
+                      <span class="mono text-xs font-semibold text-slate-600"
+                        >d9f3a07</span
+                      >
+                      <span class="text-[10px] text-slate-400">1 day ago</span>
+                    </div>
+                    <h5 class="text-sm font-bold text-slate-900 mt-1">
+                      prettier
+                    </h5>
+                  </div>
+                </div>
+
+                <!-- Commit 8 - CI finally passes -->
+                <div class="relative group">
+                  <span
+                    class="absolute -left-[21px] top-1.5 w-3 h-3 rounded-full bg-rose-500 ring-4 ring-white"
+                  ></span>
+                  <div
+                    class="bg-rose-50/50 p-3 rounded-lg border border-rose-100"
+                  >
+                    <div class="flex justify-between items-start gap-4">
+                      <span class="mono text-xs font-semibold text-slate-600"
+                        >e8a12c5</span
+                      >
+                      <span class="text-[10px] text-slate-400">1 day ago</span>
+                    </div>
+                    <h5 class="text-sm font-bold text-slate-900 mt-1">
+                      ci should pass now
+                    </h5>
+                  </div>
+                </div>
+
+                <!-- Commit 9 -->
+                <div class="relative group">
+                  <span
+                    class="absolute -left-[21px] top-1.5 w-3 h-3 rounded-full bg-rose-500 ring-4 ring-white"
+                  ></span>
+                  <div
+                    class="bg-rose-50/50 p-3 rounded-lg border border-rose-100"
+                  >
+                    <div class="flex justify-between items-start gap-4">
+                      <span class="mono text-xs font-semibold text-slate-600"
+                        >fd11e9a</span
+                      >
+                      <span class="text-[10px] text-slate-400">1 day ago</span>
+                    </div>
+                    <h5 class="text-sm font-bold text-slate-900 mt-1">
+                      trying another way
+                    </h5>
+                  </div>
+                </div>
+
+                <!-- Review Divider -->
+                <div class="relative">
+                  <div class="flex items-center gap-2 py-2">
+                    <div class="flex-1 h-px bg-slate-300"></div>
+                    <span
+                      class="text-[10px] font-semibold text-slate-400 uppercase tracking-wider flex items-center gap-1"
+                    >
+                      <i data-lucide="eye" class="w-3 h-3"></i>
+                      PR opened for review
+                    </span>
+                    <div class="flex-1 h-px bg-slate-300"></div>
+                  </div>
+                </div>
+
+                <!-- Commit 10 -->
+                <div class="relative group">
+                  <span
+                    class="absolute -left-[21px] top-1.5 w-3 h-3 rounded-full bg-rose-500 ring-4 ring-white"
+                  ></span>
+                  <div
+                    class="bg-rose-50/50 p-3 rounded-lg border border-rose-100"
+                  >
+                    <div class="flex justify-between items-start gap-4">
+                      <span class="mono text-xs font-semibold text-slate-600"
+                        >ab409ee</span
+                      >
+                      <span class="text-[10px] text-slate-400"
+                        >2 hours ago</span
+                      >
+                    </div>
+                    <h5 class="text-sm font-bold text-slate-900 mt-1">
+                      Code review feedback
+                    </h5>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Bad Habits of Universe A -->
+      <section class="space-y-8">
+        <div class="text-center max-w-2xl mx-auto space-y-2">
+          <h2 class="text-2xl md:text-3xl font-extrabold tracking-tight">
+            The Habits That Built Universe A
+          </h2>
+          <p class="text-slate-600">
+            Universe A isn't the result of a bad developer - it's the result of
+            unchecked habits that feel harmless in the moment.
+            <br class="hidden md:block" />
+            <span class="font-medium text-slate-700"
+              >Here's what each anti-pattern actually costs.</span
+            >
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <!-- Anti-pattern 0: Missing PR description - full width -->
+          <div
+            class="md:col-span-2 bg-white border border-rose-200 rounded-xl p-6 space-y-4 shadow-sm"
+          >
+            <div class="flex items-center gap-3">
+              <div
+                class="w-10 h-10 rounded-lg bg-rose-100 text-rose-700 flex items-center justify-center flex-shrink-0"
+              >
+                <i data-lucide="file-x-2" class="w-5 h-5"></i>
+              </div>
+              <h3 class="text-base font-bold text-slate-900">
+                The Empty PR Description
+              </h3>
+            </div>
+            <div class="bg-rose-50 border border-rose-100 rounded-lg p-4">
+              <div class="flex items-start justify-between gap-4 mb-2">
+                <span class="text-sm font-semibold text-slate-700"
+                  >JIR-404</span
+                >
+                <span
+                  class="text-xs bg-slate-200 text-slate-600 px-2 py-0.5 rounded"
+                  >#812</span
+                >
+              </div>
+              <p class="text-xs text-slate-400 italic">
+                No description provided. "fixes the ticket"
+              </p>
+            </div>
+            <p class="text-sm text-slate-600 leading-relaxed">
+              A PR description is the <em>only</em> place where a developer can
+              speak directly to their reviewer before the review begins. It sets
+              the stage: what problem was being solved, what approach was taken,
+              and what trade-offs were made. Skipping it forces every reviewer
+              to reconstruct that context from scratch - by reading every diff,
+              hunting through Jira, and guessing at intent.
+            </p>
+            <p class="text-sm text-slate-600 leading-relaxed">
+              "Fixes the ticket" is the equivalent of handing someone a bag of
+              puzzle pieces with the box thrown away. The reviewer
+              <em>can</em> still assemble it, but you've made their job
+              measurably harder - and you've introduced the very real risk that
+              they'll misunderstand the intent and approve something that
+              doesn't actually solve the right problem.
+            </p>
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 pt-2">
+              <div
+                class="bg-rose-50/60 border border-rose-100 rounded-lg p-3 text-xs space-y-1"
+              >
+                <span class="font-semibold text-rose-800 block"
+                  >For the reviewer</span
+                >
+                <p class="text-slate-600">
+                  No context on what changed or why. They must infer intent from
+                  the diff alone, increasing review time and the chance of a
+                  misread approval.
+                </p>
+              </div>
+              <div
+                class="bg-rose-50/60 border border-rose-100 rounded-lg p-3 text-xs space-y-1"
+              >
+                <span class="font-semibold text-rose-800 block"
+                  >For the future engineer</span
+                >
+                <p class="text-slate-600">
+                  When this code needs to change in 6 months, there's no record
+                  of the constraints or decisions made. The diff shows
+                  <em>what</em>; the description would have explained
+                  <em>why</em>.
+                </p>
+              </div>
+              <div
+                class="bg-rose-50/60 border border-rose-100 rounded-lg p-3 text-xs space-y-1"
+              >
+                <span class="font-semibold text-rose-800 block"
+                  >For the team</span
+                >
+                <p class="text-slate-600">
+                  PR descriptions form part of the institutional memory of a
+                  codebase. Blank ones create a gap in the record that can never
+                  be recovered after the branch is merged.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Anti-pattern 1: WIP commits -->
+          <div
+            class="bg-white border border-rose-200 rounded-xl p-6 space-y-4 shadow-sm"
+          >
+            <div class="flex items-center gap-3">
+              <div
+                class="w-10 h-10 rounded-lg bg-rose-100 text-rose-700 flex items-center justify-center flex-shrink-0"
+              >
+                <i data-lucide="file-question" class="w-5 h-5"></i>
+              </div>
+              <h3 class="text-base font-bold text-slate-900">
+                Placeholder Messages
+              </h3>
+            </div>
+            <div class="flex flex-wrap gap-2">
+              <span
+                class="mono text-xs bg-rose-50 border border-rose-200 text-rose-700 px-2 py-1 rounded"
+                >wip</span
+              >
+              <span
+                class="mono text-xs bg-rose-50 border border-rose-200 text-rose-700 px-2 py-1 rounded"
+                >fix</span
+              >
+              <span
+                class="mono text-xs bg-rose-50 border border-rose-200 text-rose-700 px-2 py-1 rounded"
+                >trying another way</span
+              >
+            </div>
+            <p class="text-sm text-slate-600 leading-relaxed">
+              These are <em>notes-to-self</em>, not commit messages. They record
+              that something happened, but not what or why. Six months later, a
+              teammate reading this history gains nothing from them - they still
+              have to open the diff and reverse-engineer the intent.
+            </p>
+          </div>
+
+          <!-- Anti-pattern 2: Mixing concerns -->
+          <div
+            class="bg-white border border-rose-200 rounded-xl p-6 space-y-4 shadow-sm"
+          >
+            <div class="flex items-center gap-3">
+              <div
+                class="w-10 h-10 rounded-lg bg-rose-100 text-rose-700 flex items-center justify-center flex-shrink-0"
+              >
+                <i data-lucide="layers" class="w-5 h-5"></i>
+              </div>
+              <h3 class="text-base font-bold text-slate-900">
+                Mixed-Concern Commits
+              </h3>
+            </div>
+            <div class="bg-rose-50 border border-rose-100 rounded-lg p-3">
+              <p class="mono text-xs text-rose-800 leading-relaxed">
+                "Updated the subscription API endpoint to handle pausing logic
+                and also fixed a few other things while I was in there"
+              </p>
+            </div>
+            <p class="text-sm text-slate-600 leading-relaxed">
+              Bundling unrelated changes into one commit destroys surgical
+              rollback. If the "few other things" introduce a regression, you
+              cannot revert them independently - you're forced to choose between
+              keeping the bug or losing the intended feature work too.
+            </p>
+          </div>
+
+          <!-- Anti-pattern 3: Lint whack-a-mole -->
+          <div
+            class="bg-white border border-rose-200 rounded-xl p-6 space-y-4 shadow-sm"
+          >
+            <div class="flex items-center gap-3">
+              <div
+                class="w-10 h-10 rounded-lg bg-rose-100 text-rose-700 flex items-center justify-center flex-shrink-0"
+              >
+                <i data-lucide="hammer" class="w-5 h-5"></i>
+              </div>
+              <h3 class="text-base font-bold text-slate-900">
+                Lint Whack-a-Mole
+              </h3>
+            </div>
+            <div class="flex flex-wrap gap-2">
+              <span
+                class="mono text-xs bg-rose-50 border border-rose-200 text-rose-700 px-2 py-1 rounded"
+                >lint</span
+              >
+              <span
+                class="mono text-xs bg-rose-50 border border-rose-200 text-rose-700 px-2 py-1 rounded"
+                >fix lint</span
+              >
+              <span
+                class="mono text-xs bg-rose-50 border border-rose-200 text-rose-700 px-2 py-1 rounded"
+                >prettier</span
+              >
+              <span
+                class="mono text-xs bg-rose-50 border border-rose-200 text-rose-700 px-2 py-1 rounded"
+                >ci should pass now</span
+              >
+            </div>
+            <p class="text-sm text-slate-600 leading-relaxed">
+              Four consecutive commits fixing automated tooling checks signals
+              that the developer wasn't running linters locally before pushing.
+              These commits add noise to the history and bury the real work -
+              making it harder to trace which commit actually introduced a
+              behavioural change.
+            </p>
+          </div>
+
+          <!-- Anti-pattern 4: Vague outcome messages -->
+          <div
+            class="bg-white border border-rose-200 rounded-xl p-6 space-y-4 shadow-sm"
+          >
+            <div class="flex items-center gap-3">
+              <div
+                class="w-10 h-10 rounded-lg bg-rose-100 text-rose-700 flex items-center justify-center flex-shrink-0"
+              >
+                <i data-lucide="message-square-x" class="w-5 h-5"></i>
+              </div>
+              <h3 class="text-base font-bold text-slate-900">
+                Outcomes Without Context
+              </h3>
+            </div>
+            <div class="flex flex-wrap gap-2">
+              <span
+                class="mono text-xs bg-rose-50 border border-rose-200 text-rose-700 px-2 py-1 rounded"
+                >button looks good</span
+              >
+              <span
+                class="mono text-xs bg-rose-50 border border-rose-200 text-rose-700 px-2 py-1 rounded"
+                >Code review feedback</span
+              >
+            </div>
+            <p class="text-sm text-slate-600 leading-relaxed">
+              These messages describe a <em>feeling</em> or a <em>process</em>,
+              not an engineering decision. "Button looks good" tells you nothing
+              about what was wrong, what was changed, or why that fix was
+              correct. "Code review feedback" is especially opaque - it hides
+              what was actually wrong and how it was addressed.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Introduction Panel / The Hypothesis -->
+      <section class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+        <div class="lg:col-span-2 space-y-4">
+          <h2 class="text-xl md:text-2xl font-bold flex items-center gap-2">
+            <i data-lucide="info" class="text-indigo-600 w-6 h-6"></i> Why
+            Commit Hygiene Matters
+          </h2>
+          <p class="text-slate-600 leading-relaxed">
+            In high-velocity software engineering, code changes constantly.
+            While code reviews capture immediate feedback and ticket management
+            systems (like Jira) track high-level requirements, the Git history
+            is the only true historical record of engineering
+            <strong>intent</strong>.
+          </p>
+          <p class="text-slate-600 leading-relaxed">
+            When we write a commit message, we aren't writing it for the
+            automated build pipeline, and we aren't just trying to pass a PR
+            gate. We are leaving a breadcrumb trail for our future selves and
+            our teammates.
+          </p>
+          <div class="p-4 bg-amber-50 border-l-4 border-amber-500 rounded-r-lg">
+            <h4
+              class="font-semibold text-amber-900 flex items-center gap-2 text-sm"
+            >
+              <i data-lucide="alert-triangle" class="w-4 h-4"></i> The Rise of
+              AI-Generated Code
+            </h4>
+            <p class="text-amber-800 text-xs mt-1 leading-relaxed">
+              As automated coding assistants grow in usage, code volume will
+              accelerate. However, AI struggles to synthesize genuine
+              architectural intent, the <em>why</em>. Human commit reviews and
+              strict manual intent documentation remain the vital quality gate
+              to prevent codebase entropy.
+            </p>
+          </div>
+        </div>
+
+        <!-- Quick Reference Metrics -->
+        <div
+          class="bg-white p-6 rounded-xl border border-slate-200 flex flex-col self-start"
+        >
+          <h3
+            class="font-bold text-sm text-slate-500 uppercase tracking-wider mb-4"
+          >
+            Golden Rules of Commit Messages
+          </h3>
+          <ul class="space-y-4">
+            <li class="flex items-start gap-3">
+              <span
+                class="flex-shrink-0 bg-emerald-100 text-emerald-800 w-6 h-6 rounded-full flex items-center justify-center text-xs font-bold"
+                >1</span
+              >
+              <div>
+                <strong class="text-sm block"
+                  >First Line limit (50-72 chars)</strong
+                >
+                <p class="text-xs text-slate-500">
+                  Keep it punchy. It should complete the sentence: "If applied,
+                  this commit will..."
+                </p>
+              </div>
+            </li>
+            <li class="flex items-start gap-3">
+              <span
+                class="flex-shrink-0 bg-emerald-100 text-emerald-800 w-6 h-6 rounded-full flex items-center justify-center text-xs font-bold"
+                >2</span
+              >
+              <div>
+                <strong class="text-sm block">Leave a blank second line</strong>
+                <p class="text-xs text-slate-500">
+                  Separates the quick summary from the verbose context in Git
+                  terminal logs.
+                </p>
+              </div>
+            </li>
+            <li class="flex items-start gap-3">
+              <span
+                class="flex-shrink-0 bg-emerald-100 text-emerald-800 w-6 h-6 rounded-full flex items-center justify-center text-xs font-bold"
+                >3</span
+              >
+              <div>
+                <strong class="text-sm block"
+                  >Focus on the 'Why', not the 'What'</strong
+                >
+                <p class="text-xs text-slate-500">
+                  The diff already tells us *what* lines changed. The message
+                  must explain *why* that choice was made.
+                </p>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </section>
+
+      <section>
+        <div class="grid grid-cols-1 gap-8 items-start max-w-2xl mx-auto">
+          <!-- Universe B Card: The Transparent Flow -->
+          <div
+            class="bg-white rounded-xl border border-emerald-200 overflow-hidden shadow-sm hover:shadow-md transition-all"
+          >
+            <div
+              class="bg-emerald-50 p-4 border-b border-emerald-200 flex items-center justify-between"
+            >
+              <div class="flex items-center gap-2">
+                <span class="w-3 h-3 rounded-full bg-emerald-500"></span>
+                <h3 class="font-bold text-emerald-800 flex items-center gap-2">
+                  Universe B: The Transparent Developer
+                </h3>
+              </div>
+            </div>
+
+            <!-- PR Details View Good -->
+            <div class="p-6 border-b border-slate-100">
+              <h4
+                class="text-xs font-semibold text-slate-400 uppercase tracking-widest mb-3"
+              >
+                Pull Request Details
+              </h4>
+              <div
+                class="space-y-2 bg-slate-50 p-4 rounded-lg border border-slate-200"
+              >
+                <div class="flex items-start justify-between gap-4">
+                  <span class="text-sm font-semibold text-slate-900"
+                    >JIR-404 Implement "Pause Subscription" workflow</span
+                  >
+                  <span
+                    class="text-xs bg-emerald-100 text-emerald-700 px-2 py-0.5 rounded"
+                    >#812</span
+                  >
+                </div>
+                <div class="text-xs text-slate-600 space-y-1 mt-2">
+                  <p>
+                    This PR introduces the ability for users to pause their
+                    subscription directly from the billing settings panel.
+                  </p>
+                  <p>
+                    DynamoDB's
+                    <code class="bg-slate-100 p-0.5 rounded">status</code>
+                    field is a reserved keyword. I used
+                    <code class="bg-slate-100 p-0.5 rounded"
+                      >ExpressionAttributeNames</code
+                    >
+                    mapping
+                    <code class="bg-slate-100 p-0.5 rounded">#ST</code>
+                    to bypass syntax errors.
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <!-- Commit Timeline Good -->
+            <div class="p-6 space-y-4">
+              <h4
+                class="text-xs font-semibold text-slate-400 uppercase tracking-widest mb-3"
+              >
+                Commit History
+              </h4>
+
+              <div
+                class="relative pl-6 space-y-6 before:content-[''] before:absolute before:left-[11px] before:top-2 before:bottom-2 before:w-[2px] before:bg-emerald-200:bg-emerald-950"
+              >
+                <!-- Commit 1 -->
+                <div class="relative group">
+                  <span
+                    class="absolute -left-[21px] top-1.5 w-3 h-3 rounded-full bg-emerald-500 ring-4 ring-white"
+                  ></span>
+                  <div
+                    class="bg-emerald-50/30 p-3 rounded-lg border border-slate-200 hover:border-emerald-500:border-emerald-500/50 transition-colors"
+                  >
+                    <div class="flex justify-between items-start gap-4">
+                      <span class="mono text-xs font-semibold text-emerald-600"
+                        >9c0de44</span
+                      >
+                      <span class="text-[10px] text-slate-400">3 days ago</span>
+                    </div>
+                    <h5 class="text-sm font-bold text-slate-900 mt-1">
+                      JIR-404 Add Pause Subscription button & modal
+                    </h5>
+                    <p class="text-xs text-slate-500 mt-2">
+                      Introduces user-facing button component in Billing
+                      Dashboard and configures a clean React layout with custom
+                      confirmation states to prevent accidental pauses.
+                    </p>
+                  </div>
+                </div>
+
+                <!-- Commit 2 -->
+                <div class="relative group">
+                  <span
+                    class="absolute -left-[21px] top-1.5 w-3 h-3 rounded-full bg-emerald-500 ring-4 ring-white"
+                  ></span>
+                  <div
+                    class="bg-emerald-50/30 p-3 rounded-lg border border-slate-200 hover:border-emerald-500:border-emerald-500/50 transition-colors"
+                  >
+                    <div class="flex justify-between items-start gap-4">
+                      <span class="mono text-xs font-semibold text-emerald-600"
+                        >2298df0</span
+                      >
+                      <span class="text-[10px] text-slate-400">2 days ago</span>
+                    </div>
+                    <h5 class="text-sm font-bold text-slate-900 mt-1">
+                      JIR-404 Create API Lambda for pausing subscription
+                    </h5>
+                    <p class="text-xs text-slate-500 mt-2">
+                      Builds out lambda entry point, parameters verification,
+                      and handles database mutation securely using standard
+                      cloud triggers.
+                    </p>
+                  </div>
+                </div>
+
+                <!-- Commit 3 -->
+                <div class="relative group">
+                  <span
+                    class="absolute -left-[21px] top-1.5 w-3 h-3 rounded-full bg-emerald-500 ring-4 ring-white"
+                  ></span>
+                  <div
+                    class="bg-emerald-50/30 p-3 rounded-lg border border-slate-200 hover:border-emerald-500:border-emerald-500/50 transition-colors"
+                  >
+                    <div class="flex justify-between items-start gap-4">
+                      <span class="mono text-xs font-semibold text-emerald-600"
+                        >f9024ab</span
+                      >
+                      <span class="text-[10px] text-slate-400">2 days ago</span>
+                    </div>
+                    <h5 class="text-sm font-bold text-slate-900 mt-1">
+                      JIR-404 Map DynamoDB query utilizing #ST prefix
+                    </h5>
+                    <p class="text-xs text-slate-500 mt-2">
+                      Uses ExpressionAttributeNames to map #ST → "status"
+                      because "status" is a DynamoDB reserved keyword.
+                      <br /><br />
+                      Considered renaming the column to "subscription_status"
+                      but that would require a data migration across all
+                      existing records.
+                    </p>
+                  </div>
+                </div>
+
+                <!-- Review Divider -->
+                <div class="relative">
+                  <div class="flex items-center gap-2 py-2">
+                    <div class="flex-1 h-px bg-emerald-300"></div>
+                    <span
+                      class="text-[10px] font-semibold text-emerald-600 uppercase tracking-wider flex items-center gap-1"
+                    >
+                      <i data-lucide="eye" class="w-3 h-3"></i>
+                      PR opened for review
+                    </span>
+                    <div class="flex-1 h-px bg-emerald-300"></div>
+                  </div>
+                </div>
+
+                <!-- Commit 4 -->
+                <div class="relative group">
+                  <span
+                    class="absolute -left-[21px] top-1.5 w-3 h-3 rounded-full bg-emerald-500 ring-4 ring-white"
+                  ></span>
+                  <div
+                    class="bg-emerald-50/30 p-3 rounded-lg border border-slate-200 hover:border-emerald-500:border-emerald-500/50 transition-colors"
+                  >
+                    <div class="flex justify-between items-start gap-4">
+                      <span class="mono text-xs font-semibold text-emerald-600"
+                        >3392ea1</span
+                      >
+                      <span class="text-[10px] text-slate-400"
+                        >2 hours ago</span
+                      >
+                    </div>
+                    <h5 class="text-sm font-bold text-slate-900 mt-1">
+                      JIR-404 Prevent duplicate submissions via button state
+                    </h5>
+                    <p class="text-xs text-slate-500 mt-2">
+                      Incorporates full disabled controls while subscription
+                      request mutations execute in-flight to prevent race
+                      condition actions.
+                    </p>
+                  </div>
+                </div>
+
+                <!-- Commit 5 -->
+                <div class="relative group">
+                  <span
+                    class="absolute -left-[21px] top-1.5 w-3 h-3 rounded-full bg-emerald-500 ring-4 ring-white"
+                  ></span>
+                  <div
+                    class="bg-emerald-50/30 p-3 rounded-lg border border-slate-200 hover:border-emerald-500:border-emerald-500/50 transition-colors"
+                  >
+                    <div class="flex justify-between items-start gap-4">
+                      <span class="mono text-xs font-semibold text-emerald-600"
+                        >a7e19c3</span
+                      >
+                      <span class="text-[10px] text-slate-400">1 hour ago</span>
+                    </div>
+                    <h5 class="text-sm font-bold text-slate-900 mt-1">
+                      JIR-404 Autofix lint warnings
+                    </h5>
+                    <p class="text-xs text-slate-500 mt-2">
+                      Linting errors missed from earlier commits are too
+                      difficult to surgically bundle into the correct commit
+                      without rewriting shared history. Styling changes apply
+                      cleanly if cherry-picked.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Why Clean Commits are Critical Section -->
+      <section class="space-y-8">
+        <div class="text-center max-w-2xl mx-auto space-y-2">
+          <h2 class="text-2xl md:text-3xl font-extrabold tracking-tight">
+            The Practices Behind Universe B
+          </h2>
+          <p class="text-slate-600">
+            Universe B isn't the result of a "better" developer - it's the
+            result of deliberate habits applied consistently. Strategic use of
+            <code class="mono bg-slate-100 px-1 rounded text-xs"
+              >git commit --amend</code
+            >
+            and
+            <code class="mono bg-slate-100 px-1 rounded text-xs"
+              >git rebase -i</code
+            >
+            keeps commits atomic and meaningful.<sup class="text-indigo-600"
+              >*</sup
+            >
+            <br class="hidden md:block" />
+            <span class="font-medium text-slate-700"
+              >Here's what each good practice actually enables.</span
+            >
+          </p>
+          <p class="text-xs text-slate-400 italic mt-2">
+            <sup class="text-indigo-600">*</sup> Only rewrite history
+            <em>before</em> pushing or sharing your branch. Once others have
+            seen the commits, treat them as immutable.
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <!-- Good practice 0: Descriptive PR description - full width -->
+          <div
+            class="md:col-span-2 bg-white border border-emerald-200 rounded-xl p-6 space-y-4 shadow-sm"
+          >
+            <div class="flex items-center gap-3">
+              <div
+                class="w-10 h-10 rounded-lg bg-emerald-100 text-emerald-700 flex items-center justify-center flex-shrink-0"
+              >
+                <i data-lucide="file-check-2" class="w-5 h-5"></i>
+              </div>
+              <h3 class="text-base font-bold text-slate-900">
+                The Complete PR Description
+              </h3>
+            </div>
+            <div class="bg-emerald-50 border border-emerald-100 rounded-lg p-4">
+              <div class="flex items-start justify-between gap-4 mb-2">
+                <span class="text-sm font-semibold text-slate-700"
+                  >JIR-404 Implement "Pause Subscription" workflow</span
+                >
+                <span
+                  class="text-xs bg-emerald-100 text-emerald-700 px-2 py-0.5 rounded"
+                  >#812</span
+                >
+              </div>
+              <p class="text-xs text-slate-600">
+                This PR introduces the ability for users to pause their
+                subscription directly from the billing settings panel.
+                <br /><br />DynamoDB's
+                <code class="bg-slate-100 p-0.5 rounded">status</code> field is
+                a reserved keyword - I used
+                <code class="bg-slate-100 p-0.5 rounded"
+                  >ExpressionAttributeNames</code
+                >
+                to bypass syntax errors.
+              </p>
+            </div>
+            <p class="text-sm text-slate-600 leading-relaxed">
+              A well-written PR description is the author's opportunity to
+              <em>teach</em> the reviewer. It explains the problem being solved,
+              the approach taken, and any non-obvious decisions made along the
+              way. This context transforms review from "spot the defect" into
+              genuine engineering collaboration.
+            </p>
+            <p class="text-sm text-slate-600 leading-relaxed">
+              When you write a description like this, you're not just helping
+              the reviewer - you're leaving a permanent record that will guide
+              anyone who touches this code in the future. The DynamoDB
+              workaround mentioned here will save the next engineer hours of
+              confusion.
+            </p>
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 pt-2">
+              <div
+                class="bg-emerald-50/60 border border-emerald-100 rounded-lg p-3 text-xs space-y-1"
+              >
+                <span class="font-semibold text-emerald-800 block"
+                  >For the reviewer</span
+                >
+                <p class="text-slate-600">
+                  Instant context on what changed and why. They can focus on
+                  verifying the implementation rather than reconstructing the
+                  requirements.
+                </p>
+              </div>
+              <div
+                class="bg-emerald-50/60 border border-emerald-100 rounded-lg p-3 text-xs space-y-1"
+              >
+                <span class="font-semibold text-emerald-800 block"
+                  >For the future engineer</span
+                >
+                <p class="text-slate-600">
+                  A searchable record of architectural decisions and
+                  workarounds. When they see the
+                  <code class="bg-slate-100 p-0.5 rounded">#ST</code> mapping,
+                  they'll know exactly why it exists.
+                </p>
+              </div>
+              <div
+                class="bg-emerald-50/60 border border-emerald-100 rounded-lg p-3 text-xs space-y-1"
+              >
+                <span class="font-semibold text-emerald-800 block"
+                  >For the team</span
+                >
+                <p class="text-slate-600">
+                  PR descriptions become institutional knowledge - a living
+                  record of how the system evolved and the reasoning behind each
+                  change.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Good practice 1: Ticket prefixes -->
+          <div
+            class="bg-white border border-emerald-200 rounded-xl p-6 space-y-4 shadow-sm"
+          >
+            <div class="flex items-center gap-3">
+              <div
+                class="w-10 h-10 rounded-lg bg-emerald-100 text-emerald-700 flex items-center justify-center flex-shrink-0"
+              >
+                <i data-lucide="link" class="w-5 h-5"></i>
+              </div>
+              <h3 class="text-base font-bold text-slate-900">
+                Ticket-Linked Commits
+              </h3>
+            </div>
+            <div class="flex flex-wrap gap-2">
+              <span
+                class="mono text-xs bg-emerald-50 border border-emerald-200 text-emerald-700 px-2 py-1 rounded"
+                >JIR-404 Add Pause button</span
+              >
+              <span
+                class="mono text-xs bg-emerald-50 border border-emerald-200 text-emerald-700 px-2 py-1 rounded"
+                >JIR-404 Create API Lambda</span
+              >
+            </div>
+            <p class="text-sm text-slate-600 leading-relaxed">
+              Every commit starts with the ticket ID. This isn't bureaucracy -
+              it's <em>traceability</em>. Six months later, anyone can run
+              <code class="mono bg-slate-100 p-0.5 rounded text-xs"
+                >git log --grep="JIR-404"</code
+              >
+              and instantly see every commit related to this feature, in order,
+              with full context.
+            </p>
+          </div>
+
+          <!-- Good practice 2: Single-concern commits -->
+          <div
+            class="bg-white border border-emerald-200 rounded-xl p-6 space-y-4 shadow-sm"
+          >
+            <div class="flex items-center gap-3">
+              <div
+                class="w-10 h-10 rounded-lg bg-emerald-100 text-emerald-700 flex items-center justify-center flex-shrink-0"
+              >
+                <i data-lucide="box" class="w-5 h-5"></i>
+              </div>
+              <h3 class="text-base font-bold text-slate-900">
+                Single-Concern Commits
+              </h3>
+            </div>
+            <div class="bg-emerald-50 border border-emerald-100 rounded-lg p-3">
+              <p class="mono text-xs text-emerald-800 leading-relaxed">
+                "JIR-404 Map DynamoDB query utilizing #ST prefix"
+              </p>
+            </div>
+            <p class="text-sm text-slate-600 leading-relaxed">
+              Each commit does exactly one thing. The UI button is separate from
+              the Lambda. The database mapping is separate from the race
+              condition fix. If any one of these introduces a regression, it can
+              be reverted surgically - without touching the rest of the feature.
+            </p>
+          </div>
+
+          <!-- Good practice 3: Explaining the why -->
+          <div
+            class="bg-white border border-emerald-200 rounded-xl p-6 space-y-4 shadow-sm"
+          >
+            <div class="flex items-center gap-3">
+              <div
+                class="w-10 h-10 rounded-lg bg-emerald-100 text-emerald-700 flex items-center justify-center flex-shrink-0"
+              >
+                <i data-lucide="message-square-text" class="w-5 h-5"></i>
+              </div>
+              <h3 class="text-base font-bold text-slate-900">
+                The "Why" in the Body
+              </h3>
+            </div>
+            <div
+              class="bg-emerald-50 border border-emerald-100 rounded-lg p-3 space-y-2"
+            >
+              <p class="mono text-xs text-emerald-800 leading-relaxed">
+                Uses ExpressionAttributeNames to map #ST → "status" because
+                "status" is a DynamoDB reserved keyword.
+              </p>
+            </div>
+            <p class="text-sm text-slate-600 leading-relaxed">
+              The diff shows <em>what</em> changed. The commit body explains
+              <em>why</em> it changed. This transforms a commit from a mere
+              checkpoint into actual documentation - the kind that answers
+              questions before they're asked.
+            </p>
+          </div>
+
+          <!-- Good practice 4: Documenting alternatives -->
+          <div
+            class="bg-white border border-emerald-200 rounded-xl p-6 space-y-4 shadow-sm"
+          >
+            <div class="flex items-center gap-3">
+              <div
+                class="w-10 h-10 rounded-lg bg-emerald-100 text-emerald-700 flex items-center justify-center flex-shrink-0"
+              >
+                <i data-lucide="git-branch" class="w-5 h-5"></i>
+              </div>
+              <h3 class="text-base font-bold text-slate-900">
+                Documenting Alternatives Considered
+              </h3>
+            </div>
+            <div
+              class="bg-emerald-50 border border-emerald-100 rounded-lg p-3 space-y-2"
+            >
+              <p class="mono text-xs text-emerald-800 leading-relaxed">
+                Considered renaming the column to "subscription_status" but that
+                would require a data migration across all existing records.
+              </p>
+            </div>
+            <p class="text-sm text-slate-600 leading-relaxed">
+              This is the mark of a senior engineer: not just documenting the
+              choice, but documenting what was <em>rejected</em> and why. Future
+              developers won't waste time exploring the same dead ends - the
+              decision tree is already visible in the commit history.
+            </p>
+          </div>
+        </div>
+
+        <!-- Sub-heading for benefits section -->
+        <div class="text-center max-w-2xl mx-auto space-y-2 pt-8">
+          <h3
+            class="text-xl md:text-2xl font-bold tracking-tight text-slate-800"
+          >
+            Why These Habits Pay Off
+          </h3>
+          <p class="text-slate-600">
+            Clean commits aren't just satisfying - they unlock real engineering
+            capabilities.
+            <br class="hidden md:block" />
+            <span class="font-medium text-slate-700"
+              >Here's how these practices pay dividends in production
+              scenarios.</span
+            >
+          </p>
+        </div>
+
+        <div class="max-w-4xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-6">
+          <!-- Rollback Scenario -->
+          <div
+            class="bg-white border border-slate-200 rounded-xl p-6 space-y-4 shadow-sm hover:shadow-md transition-shadow"
+          >
+            <div
+              class="w-12 h-12 rounded-lg bg-amber-100 text-amber-800 flex items-center justify-center"
+            >
+              <i data-lucide="rotate-ccw" class="w-6 h-6"></i>
+            </div>
+            <h3 class="text-lg font-bold">Surgical Rollbacks</h3>
+            <p class="text-sm text-slate-600 leading-relaxed">
+              Imagine the frontend subscription button behaves incorrectly on
+              some mobile screen formats and needs immediate rollback, but the
+              backend Lambda logic must remain live to support system calls from
+              partners.
+            </p>
+            <div
+              class="bg-slate-50 p-4 rounded-lg space-y-3 border border-slate-200 text-xs"
+            >
+              <div>
+                <span class="text-rose-600 font-bold block mb-1"
+                  >In Universe A (Opaque):</span
+                >
+                <p class="text-slate-500">
+                  The developer has mixed up modal UI shifts and DynamoDB
+                  parameters in mixed commits. Rolling back the UI requires
+                  manual code splitting, introducing human error and potential
+                  downtime risk.
+                </p>
+              </div>
+              <div>
+                <span class="text-emerald-600 font-bold block mb-1"
+                  >In Universe B (Transparent):</span
+                >
+                <p class="text-slate-500">
+                  Atomic commits make life easy. Simply execute
+                  <code class="mono bg-slate-200 p-0.5 rounded"
+                    >git revert 9c0de44</code
+                  >. The database modifications and subscription mechanics are
+                  unaffected.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Git Bisect Scenario -->
+          <div
+            class="bg-white border border-slate-200 rounded-xl p-6 space-y-4 shadow-sm hover:shadow-md transition-shadow"
+          >
+            <div
+              class="w-12 h-12 rounded-lg bg-violet-100 text-violet-800 flex items-center justify-center"
+            >
+              <i data-lucide="search" class="w-6 h-6"></i>
+            </div>
+            <h3 class="text-lg font-bold">Git Bisect Becomes a Superpower</h3>
+            <p class="text-sm text-slate-600 leading-relaxed">
+              A subtle regression appeared sometime in the last two weeks. No
+              one knows when or what caused it. Time to binary search through
+              history with
+              <code class="mono bg-slate-100 px-1 rounded text-xs"
+                >git bisect</code
+              >.
+            </p>
+            <div
+              class="bg-slate-50 p-4 rounded-lg space-y-3 border border-slate-200 text-xs"
+            >
+              <div>
+                <span class="text-rose-600 font-bold block mb-1"
+                  >In Universe A (Opaque):</span
+                >
+                <p class="text-slate-500">
+                  Bisect lands on "fix stuff" - a 47-file commit with unrelated
+                  changes. You still don't know which change caused the bug.
+                  Bisect wasted.
+                </p>
+              </div>
+              <div>
+                <span class="text-emerald-600 font-bold block mb-1"
+                  >In Universe B (Transparent):</span
+                >
+                <p class="text-slate-500">
+                  Bisect lands on "refactor: extract validation logic to
+                  useFormValidator hook". A 3-file change. The bug is obvious
+                  within minutes.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Code Review Scenario -->
+          <div
+            class="bg-white border border-slate-200 rounded-xl p-6 space-y-4 shadow-sm hover:shadow-md transition-shadow"
+          >
+            <div
+              class="w-12 h-12 rounded-lg bg-blue-100 text-blue-800 flex items-center justify-center"
+            >
+              <i data-lucide="eye" class="w-6 h-6"></i>
+            </div>
+            <h3 class="text-lg font-bold">
+              Reviews That Don't Drain Your Team
+            </h3>
+            <p class="text-sm text-slate-600 leading-relaxed">
+              A 400-line PR lands in your review queue. Your cognitive load
+              determines how thoroughly you can evaluate it.
+            </p>
+            <div
+              class="bg-slate-50 p-4 rounded-lg space-y-3 border border-slate-200 text-xs"
+            >
+              <div>
+                <span class="text-rose-600 font-bold block mb-1"
+                  >In Universe A (Opaque):</span
+                >
+                <p class="text-slate-500">
+                  One blob of changes. Reviewer must mentally reconstruct what
+                  changed and why. Fatigue sets in. "LGTM" gets stamped without
+                  deep review.
+                </p>
+              </div>
+              <div>
+                <span class="text-emerald-600 font-bold block mb-1"
+                  >In Universe B (Transparent):</span
+                >
+                <p class="text-slate-500">
+                  Review commit-by-commit. Each tells a story. Reviewers catch
+                  edge cases because they can focus on one logical change at a
+                  time.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Cherry-Pick Scenario -->
+          <div
+            class="bg-white border border-slate-200 rounded-xl p-6 space-y-4 shadow-sm hover:shadow-md transition-shadow"
+          >
+            <div
+              class="w-12 h-12 rounded-lg bg-pink-100 text-pink-800 flex items-center justify-center"
+            >
+              <i data-lucide="cherry" class="w-6 h-6"></i>
+            </div>
+            <h3 class="text-lg font-bold">
+              Hotfix Cherry-Picks That Actually Work
+            </h3>
+            <p class="text-sm text-slate-600 leading-relaxed">
+              Production is down. You need to backport a single security fix to
+              the release branch without bringing along unrelated feature work.
+            </p>
+            <div
+              class="bg-slate-50 p-4 rounded-lg space-y-3 border border-slate-200 text-xs"
+            >
+              <div>
+                <span class="text-rose-600 font-bold block mb-1"
+                  >In Universe A (Opaque):</span
+                >
+                <p class="text-slate-500">
+                  The fix is buried in a commit with 12 other changes.
+                  Cherry-pick brings conflicts and unrelated code. Manual
+                  surgery required at 2 AM.
+                </p>
+              </div>
+              <div>
+                <span class="text-emerald-600 font-bold block mb-1"
+                  >In Universe B (Transparent):</span
+                >
+                <p class="text-slate-500">
+                  <code class="mono bg-slate-200 p-0.5 rounded"
+                    >git cherry-pick abc123</code
+                  >
+                  applies cleanly. Fix deployed. Back to bed.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Git Blame Scenario -->
+          <div
+            class="bg-white border border-slate-200 rounded-xl p-6 space-y-4 shadow-sm hover:shadow-md transition-shadow"
+          >
+            <div
+              class="w-12 h-12 rounded-lg bg-emerald-100 text-emerald-800 flex items-center justify-center"
+            >
+              <i data-lucide="file-question" class="w-6 h-6"></i>
+            </div>
+            <h3 class="text-lg font-bold">
+              Blame That Teaches Instead of Frustrates
+            </h3>
+            <p class="text-sm text-slate-600 leading-relaxed">
+              You encounter a bizarre null check that seems unnecessary. Was
+              this intentional? Is there context you're missing?
+            </p>
+            <div
+              class="bg-slate-50 p-4 rounded-lg space-y-3 border border-slate-200 text-xs"
+            >
+              <div>
+                <span class="text-rose-600 font-bold block mb-1"
+                  >In Universe A (Opaque):</span
+                >
+                <p class="text-slate-500">
+                  Blame shows "updates". No ticket reference. The author left
+                  the company. You remove it, ship it, and watch production
+                  crash.
+                </p>
+              </div>
+              <div>
+                <span class="text-emerald-600 font-bold block mb-1"
+                  >In Universe B (Transparent):</span
+                >
+                <p class="text-slate-500">
+                  Blame links to "fix: handle null response from legacy API
+                  (JIRA-789)". The ticket explains the edge case. The null check
+                  stays.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Onboarding Scenario -->
+          <div
+            class="bg-white border border-slate-200 rounded-xl p-6 space-y-4 shadow-sm hover:shadow-md transition-shadow"
+          >
+            <div
+              class="w-12 h-12 rounded-lg bg-cyan-100 text-cyan-800 flex items-center justify-center"
+            >
+              <i data-lucide="graduation-cap" class="w-6 h-6"></i>
+            </div>
+            <h3 class="text-lg font-bold">Onboarding Through History</h3>
+            <p class="text-sm text-slate-600 leading-relaxed">
+              A new team member needs to understand why the payment flow evolved
+              to its current architecture.
+            </p>
+            <div
+              class="bg-slate-50 p-4 rounded-lg space-y-3 border border-slate-200 text-xs"
+            >
+              <div>
+                <span class="text-rose-600 font-bold block mb-1"
+                  >In Universe A (Opaque):</span
+                >
+                <p class="text-slate-500">
+                  Git log is noise. They need a senior dev's time for a 2-hour
+                  walkthrough. That tribal knowledge creates a bus factor.
+                </p>
+              </div>
+              <div>
+                <span class="text-emerald-600 font-bold block mb-1"
+                  >In Universe B (Transparent):</span
+                >
+                <p class="text-slate-500">
+                  <code class="mono bg-slate-200 p-0.5 rounded"
+                    >git log --oneline src/payments/</code
+                  >
+                  reads like a changelog. Self-serve archaeology. New dev is
+                  productive in days, not weeks.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Automated Changelogs Scenario -->
+          <div
+            class="bg-white border border-slate-200 rounded-xl p-6 space-y-4 shadow-sm hover:shadow-md transition-shadow"
+          >
+            <div
+              class="w-12 h-12 rounded-lg bg-orange-100 text-orange-800 flex items-center justify-center"
+            >
+              <i data-lucide="scroll-text" class="w-6 h-6"></i>
+            </div>
+            <h3 class="text-lg font-bold">Changelogs That Write Themselves</h3>
+            <p class="text-sm text-slate-600 leading-relaxed">
+              Release day. Product wants to know what shipped. The CEO wants to
+              announce features. Support needs to know what changed.
+            </p>
+            <div
+              class="bg-slate-50 p-4 rounded-lg space-y-3 border border-slate-200 text-xs"
+            >
+              <div>
+                <span class="text-rose-600 font-bold block mb-1"
+                  >In Universe A (Opaque):</span
+                >
+                <p class="text-slate-500">
+                  Someone spends 3 hours manually combing through PRs and Slack
+                  threads to reconstruct what shipped. Half the items are
+                  forgotten.
+                </p>
+              </div>
+              <div>
+                <span class="text-emerald-600 font-bold block mb-1"
+                  >In Universe B (Transparent):</span
+                >
+                <p class="text-slate-500">
+                  <code class="mono bg-slate-200 p-0.5 rounded"
+                    >conventional-changelog</code
+                  >
+                  generates a polished, categorized changelog automatically.
+                  Ship and share in minutes.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <!-- CI/CD Optimization Scenario -->
+          <div
+            class="bg-white border border-slate-200 rounded-xl p-6 space-y-4 shadow-sm hover:shadow-md transition-shadow"
+          >
+            <div
+              class="w-12 h-12 rounded-lg bg-indigo-100 text-indigo-800 flex items-center justify-center"
+            >
+              <i data-lucide="zap" class="w-6 h-6"></i>
+            </div>
+            <h3 class="text-lg font-bold">
+              Smarter CI That Knows What Changed
+            </h3>
+            <p class="text-sm text-slate-600 leading-relaxed">
+              Your monorepo has 200 packages. Running all tests takes 45
+              minutes. Can CI be smarter about what to run?
+            </p>
+            <div
+              class="bg-slate-50 p-4 rounded-lg space-y-3 border border-slate-200 text-xs"
+            >
+              <div>
+                <span class="text-rose-600 font-bold block mb-1"
+                  >In Universe A (Opaque):</span
+                >
+                <p class="text-slate-500">
+                  Mixed commits touch too many paths. CI can't determine scope.
+                  Every PR runs the full 45-minute suite. Developer velocity
+                  tanks.
+                </p>
+              </div>
+              <div>
+                <span class="text-emerald-600 font-bold block mb-1"
+                  >In Universe B (Transparent):</span
+                >
+                <p class="text-slate-500">
+                  Clean commits let CI infer affected packages. Only relevant
+                  tests run. PR feedback in 4 minutes. Ship faster, spend less
+                  on compute.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer
+      class="border-t border-slate-200 bg-white py-8 px-6 text-center text-xs text-slate-500"
+    >
+      <div class="max-w-7xl mx-auto space-y-2">
+        <p>
+          Designed as a reference guide for development teams aiming for clean
+          commit hygiene.
+        </p>
+      </div>
+    </footer>
+
+    <script>
+      // Initialize Lucide icons
+      lucide.createIcons();
+    </script>
+  </body>
+</html>
